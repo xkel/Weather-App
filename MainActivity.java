@@ -19,9 +19,11 @@ import android.widget.TextView;
 
 public class MainActivity extends AppCompatActivity {
 
+    //Temporary text views for the content_main XML file
     static TextView placeTextView;
     static TextView temperatureTextView;
 
+    //onCreate method
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,9 +31,11 @@ public class MainActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        
         placeTextView = (TextView) findViewById(R.id.nameTextView);
         temperatureTextView = (TextView) findViewById(R.id.temperatureTextView);
 
+        //Location manager/permission needed when dealing with fine location
         LocationManager locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
 
         String provider = locationManager.getBestProvider(new Criteria(), false);
@@ -53,6 +57,7 @@ public class MainActivity extends AppCompatActivity {
         double longitutde = location.getLongitude();
 
 
+        //Download object created to utilize JSON provided by opeanweathermap API
         DownloadClass download = new DownloadClass();
         download.execute("http://samples.openweathermap.org/data/2.5/weather?lat=" + String.valueOf(latitude) + "&lon=" + String.valueOf(longitutde) + "&appid=b1b15e88fa797225412429c1c50c122a1");
 
